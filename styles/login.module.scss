@@ -1,0 +1,63 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: start;
+
+    margin-top: 75px;
+    max-width: 500px;
+    width: 100%;
+
+    &__input {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid black;
+        padding: 10px 15px;
+        margin-bottom: 0px;
+        font-size: 14px;
+
+        &_password {
+            font-family: Verdana;
+            letter-spacing: 0.125em;
+        }
+    }
+
+    &__error-message {
+        color: #bf1650;
+        margin-bottom: 10px;
+          
+        &::before {
+            display: inline;
+            content: "⚠ ";
+        }
+    }
+    
+    &__submit-btn {
+        position: relative;
+
+        background: #4d93e2;
+        color: white;
+        text-transform: uppercase;
+        border-radius: 10px;
+        margin-top: 20px;
+        padding: 20px;
+        font-size: 16px;
+        font-weight: 100;
+        letter-spacing: 2px;
+        border: none;
+
+        cursor: pointer;
+    }
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+
+    &__checkbox {
+        width: 20px;
+        height: 20px;
+    }
+}
