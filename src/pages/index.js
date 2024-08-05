@@ -19,6 +19,9 @@ export default function Home({data}) {
 
        const { gsap } = await import("gsap");
        const { PixiPlugin }  = await import("gsap/PixiPlugin");
+
+      const {default: Ball} = await import("../ball.js");
+
       if(!IsComponentMount.current) {
         return;
       }
@@ -28,7 +31,7 @@ export default function Home({data}) {
       PixiPlugin.registerPIXI(PIXI);
       window.gsap = gsap;
 
-      const {default: Ball} = await import("../ball.js");
+      
 
       let ball = new Ball(data);
       ball = ball.getInstance();

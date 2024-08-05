@@ -107,9 +107,9 @@ class Ball {
                 .to(this.ball, {pixi: {y: this.ball.y}, duration: commonDuration * 0.5, ease: "power1.in" }, '>')
 
                 .to(this.ball, {pixi: {scaleX: ballDefaultScale * 0.8, scaleY: ballDefaultScale * 1.2}, duration: commonDuration * 0.1333 }, 0)
-                .to(this.ball, {pixi: {scaleX: ballDefaultScale, scaleY: ballDefaultScale}, duration: commonDuration * 2.666 }, 0.4)
-                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 0.8, scaleY: ballDefaultScale * 1.2}, duration: commonDuration * 2.666, ease: "power1.inOut" }, '>-0')
-                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 1.2, scaleY: ballDefaultScale * 0.8}, duration: commonDuration * 0.2 }, 1.40)
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale, scaleY: ballDefaultScale}, duration: commonDuration * 0.2666 }, '>+0.4')
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 0.8, scaleY: ballDefaultScale * 1.2}, duration: commonDuration * 0.2666, ease: "power1.inOut" }, '>-0.1')
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 1.2, scaleY: ballDefaultScale * 0.8}, duration: commonDuration * 0.2 }, '>+0.10')
                 .to(this.ball, {pixi: {scaleX: ballDefaultScale, scaleY: ballDefaultScale}, duration: commonDuration * 0.1333 }, '>')
     }
 
