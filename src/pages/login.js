@@ -101,8 +101,9 @@ export default function Login() {
             router.push('/');
         }
         catch(e) {
-            const error = e.response.status;
-            if(error === 400){
+            console.log(e);
+            const error = e.code;
+            if(error === "ERR_BAD_REQUEST"){
                 setError("server-problem", {
                     type: 'server',
                     message: LOGIN.wrongPassOrName,

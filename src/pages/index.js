@@ -9,15 +9,21 @@ import { setTodos } from "../store/todosSlice";
 
 export default function Home({data}) {
   const ref = useRef();
+  const IsComponentMount = useRef(false);
   const dispatch = useDispatch();
   
   useEffect(() => {
+    IsComponentMount.current = true;
     (async () => {
-      const PIXI = await import("pixi.js");
+       const PIXI = await import("pixi.js");
+
+       const { gsap } = await import("gsap");
+       const { PixiPlugin }  = await import("gsap/PixiPlugin");
+      if(!IsComponentMount.current) {
+        return;
+      }
       window.PIXI = PIXI;
 
-      const { gsap } = await import("gsap");
-      const { PixiPlugin }  = await import("gsap/PixiPlugin");
       gsap.registerPlugin(PixiPlugin);
       PixiPlugin.registerPIXI(PIXI);
       window.gsap = gsap;
@@ -32,7 +38,8 @@ export default function Home({data}) {
       await ball.init({ background: '#87ceeb', resizeTo: ref.current}, ref.current);
       await ball.loadTextures({height: ref.current.offsetHeight, width: ref.current.offsetWidth});
         //todo: логика инициализации сцены
-    })()
+    })();
+    return () => {IsComponentMount.current = false};
   }, []);
 
   useEffect(() => {
@@ -58,4 +65,3 @@ export async function getServerSideProps() {
  
   return { props: { data } }
 }
-

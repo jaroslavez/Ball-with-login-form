@@ -73,8 +73,9 @@ class Ball {
         const spriteOfBall = new PIXI.Sprite(textureBall);
         spriteOfBall.width = 150;
         spriteOfBall.height = 150;
+        spriteOfBall.anchor.set(0.5, 1);
         spriteOfBall.x = (widthContainer - spriteOfBall.width) / 2;
-        spriteOfBall.y = heightContainer - spriteOfBall.height / 2 - 200;
+        spriteOfBall.y = heightContainer - spriteOfBall.height / 2;
 
         spriteOfBall.eventMode = 'static';
         spriteOfBall.cursor = 'pointer';
@@ -92,39 +93,24 @@ class Ball {
 
         const currentData = this.getCurrentData();
 
-        gsap.to(this.ball, {
-            keyframes: {
-                "0%": {
-                    pixi: {y: this.ball.y - 40 }, 
-                    duration: 0.1, 
-                    ease: 'power1.out'
-                },
-                "10%":{
-                    pixi: {y: this.ball.y - 400, scaleY: 1.2, scaleX: 0.8}, 
-                    duration: 0.4, 
-                    ease: 'power1.out'
-                },
-                "50%": {
-                    pixi: {y: this.ball.y - 320, scaleY: 1.2, scaleX: 0.8}, 
-                    duration: 0.2, 
-                    ease: 'power1.out',
-                },
-                "70%": {
-                    pixi: {y: this.ball.y - 40, scaleY: 1, scaleX: 1}, 
-                    duration: 0.3, 
-                    ease: 'bounce.out',
-                    
-                },
-                "90%": {
-                    pixi: {y: this.ball.y, scaleY: 1, scaleX: 1}, 
-                    onComplete: () =>  {
-                        this.animationComplete = true;
-                        this.setText(currentData.title);
-                    }
-                }
-            },
-            duration: 2,
-        })
+        const ballDefaultScale = 0.733;
+
+        const timeline = gsap.timeline({onComplete: () =>  {
+            this.animationComplete = true;
+            this.setText(currentData.title);
+            }
+        });
+
+        const commonDuration = 1.5;
+
+        timeline.to(this.ball, {pixi: {y: this.ball.y - 400 }, duration: commonDuration * 0.5, ease: "power1.out" })
+                .to(this.ball, {pixi: {y: this.ball.y}, duration: commonDuration * 0.5, ease: "power1.in" }, '>')
+
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 0.8, scaleY: ballDefaultScale * 1.2}, duration: commonDuration * 0.1333 }, 0)
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale, scaleY: ballDefaultScale}, duration: commonDuration * 2.666 }, 0.4)
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 0.8, scaleY: ballDefaultScale * 1.2}, duration: commonDuration * 2.666, ease: "power1.inOut" }, '>-0')
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale * 1.2, scaleY: ballDefaultScale * 0.8}, duration: commonDuration * 0.2 }, 1.40)
+                .to(this.ball, {pixi: {scaleX: ballDefaultScale, scaleY: ballDefaultScale}, duration: commonDuration * 0.1333 }, '>')
     }
 
     getCurrentData() {
